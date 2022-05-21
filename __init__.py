@@ -75,9 +75,9 @@ class LinuxControl(MycroftSkill):
     def handle_lock(self, message):
         return self.api_send("lock", 'lock-success', 'lock-failed')
 
-    @intent_handler(IntentBuilder('sleep'))
+    @intent_handler(IntentBuilder('sleep').require('sleep'))
     def handle_sleep(self, message):
-        return self.api_send("speep", 'blank', 'sleep-failed')
+        return self.api_send("sleep", 'blank', 'sleep-failed')
 
     @intent_handler(IntentBuilder('hibernate'))
     def handle_hibernate(self, message):
