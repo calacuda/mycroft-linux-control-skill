@@ -1,4 +1,4 @@
-# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/terminal.svg" card_color="#FEE255" width="50" height="50" style="vertical-align:bottom"/> Tmp
+# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/terminal.svg" card_color="#FEE255" width="50" height="50" style="vertical-align:bottom"/> Linux-Control-Skill
 Control your linux box with your voice
 
 ## About

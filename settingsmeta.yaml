@@ -1,22 +1,27 @@
 
 skillMetadata:
   sections:
-    - name: Options << Name of section
+    - name: General Configs
       fields:
-        - name: internal_python_variable_name
+        - name: api-socket
           type: text
-          label: Setting Friendly Display Name
-          value: ""
-          placeholder: demo prompt in the input box
-    - name: Login << Name of another section
-      fields:
-        - type: label
-          label: Just a little bit of extra info for the user to understand following settings
-        - name: username
+          label: desktop-automater socket path
+          value: "/tmp/desktop-automater"
+          placeholder: "desktop-automater socket path"
+        - name: bspwm-socket
           type: text
-          label: Username
-          value: ""
-        - name: password
-          type: password
-          label: Password
-          value: ""
+          label: bspwm socket path
+          value: "/tmp/bspwm_0_0-socket"
+          placeholder: "bspwm spocket path"
+    # - name: Login << Name of another section
+    #   fields:
+    #     - type: label
+    #       label: Just a little bit of extra info for the user to understand following settings
+    #     - name: username
+    #       type: text
+    #       label: Username
+    #       value: ""
+    #     - name: password
+    #       type: password
+    #       label: Password
+    #       value: ""

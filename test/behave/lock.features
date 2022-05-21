@@ -1,0 +1,5 @@
+Feature: lock
+  Scenario: lock the machine
+     Given an English speaking user
+     When the user says "lock this machine"
+     Then "Linux-Control-Skill" should reply with "system locked"
