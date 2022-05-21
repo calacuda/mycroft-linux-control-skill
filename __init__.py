@@ -71,7 +71,7 @@ class LinuxControl(MycroftSkill):
     def query_wrap(self, query):
         return bspwm_send(self.bspwm_path, f"query {payload}").decode('utf-8')
 
-    @intent_handler(IntentBuilder('lock'))
+    @intent_handler(IntentBuilder('lock.intent'))
     def handle_lock(self, message):
         return self.api_send("lock", 'lock-success', 'lock-failed')
 
