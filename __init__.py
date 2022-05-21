@@ -60,12 +60,14 @@ class LinuxControl(MycroftSkill):
             if int(res[0]) == 0:
                 # success
                 # have it beep instead of say things if success_f is 'blank'
-                self.speak_dialog(success_f)
+                if success_f:
+                    self.speak_dialog(success_f)
                 return True
             else:
                 # failed
                 # have it beep instead of say things if failed_f is 'blank'
-                self.speak_dialog(failed_f)
+                if failed_f:
+                    self.speak_dialog(failed_f)
                 return False
 
 
