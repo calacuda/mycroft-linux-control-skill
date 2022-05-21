@@ -4,7 +4,23 @@ from adapt.intent import IntentBuilder
 from mycroft import MycroftSkill, intent_file_handler
 import socket
 from subprocess import Popen, PIPE
-import bspwm
+import sockets
+
+def to_api(cmd):
+    """replaces spaces with null chars and trurns it to bytes"""
+    null = bytes(chr(0), 'utf-8')
+    return b''.join([bytes(tok, 'utf-8') + null for tok in cmd.split(' ')])
+
+
+def send(spath, payload):
+    """send payload over the unix socket"""
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
+        s.connect(spath)
+        s.send(to_api(payload))
+        s.shutdown(1)
+        res = s.recv(1024)
+        # print(str(res))
+        return res
 
 
 class LinuxControl(MycroftSkill):
@@ -52,7 +68,7 @@ class LinuxControl(MycroftSkill):
 
 
     def query_wrap(self, query):
-        return bspwm.send(self.bspwm_path, f"query {payload}").decode('utf-8')
+        return send(self.bspwm_path, f"query {payload}").decode('utf-8')
 
     @intent_file_handler('lock')
     def handle_lock(self, message):
