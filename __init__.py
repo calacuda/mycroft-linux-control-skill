@@ -3,7 +3,7 @@ from mycroft import MycroftSkill, intent_handler
 from adapt.intent import IntentBuilder
 from mycroft import MycroftSkill, intent_file_handler
 import socket
-from subprocess import Popen, PIPE
+from subprocess import run, PIPE
 import sockets
 
 def to_api(cmd):
