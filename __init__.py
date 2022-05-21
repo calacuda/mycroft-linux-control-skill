@@ -9,7 +9,7 @@ import sockets
 def to_api(cmd):
     """replaces spaces with null chars and trurns it to bytes"""
     null = bytes(chr(0), 'utf-8')
-    return b''.join([bytes(str(tok), 'utf-8') + null for tok in cmd.split(' ')])
+    return bytes('', 'utf-8').join([bytes(str(tok), 'utf-8') + null for tok in cmd.split(' ')])
 
 
 def send(spath, payload):
