@@ -1,5 +1,10 @@
 Feature: lock
   Scenario: lock the machine
     Given an English speaking user
-     When the user says "lock this machine"
-     Then "Linux-Control-Skill" should reply with "system lock-success"
+    When the user says "<lock>"
+    Then "Linux-Control-Skill" should reply with dialog from "system lock-success"
+
+    Examples: lock
+           | lock the computer |
+           | lock this machine |
+           | initiate lock-down |
