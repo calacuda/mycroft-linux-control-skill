@@ -57,7 +57,6 @@ class LinuxControl(MycroftSkill):
             s.send(bytes(payload, 'ascii'))
             s.shutdown(1)  # tells the server im done sending data and it can reply now.
             res = s.recv(1024).decode('utf-8')
-            self.log.error(f"resived {res[0]}")
             if int(res[0]) == 0:
                 # success
                 # have it beep instead of say things if success_f is 'blank'
@@ -79,21 +78,21 @@ class LinuxControl(MycroftSkill):
 
     @intent_handler(IntentBuilder('sleep').require('sleep'))
     def handle_sleep(self, message):
-        return self.api_send("sleep", 'blank', 'sleep-failed')
+        return self.api_send("sleep", '', 'sleep-failed')
 
     @intent_handler(IntentBuilder('hibernate'))
     def handle_hibernate(self, message):
-        return self.api_send("hibernate", 'blank', 'hibernate-failed')
+        return self.api_send("hibernate", '', 'hibernate-failed')
 
     @intent_handler(IntentBuilder('switch-desktops').require('Desktop'))
     def handle_switch_desktops(self, message):
         desktop = message.data.get('Desktop')
-        return self.api_send(f"focus-on {desktop}", 'blank', 'blank')
+        return self.api_send(f"focus-on {desktop}", '', '')
 
     @intent_handler(IntentBuilder('move').require('Desktop'))
     def handle_move(self, message):
         desktop = message.data.get('Desktop')
-        return self.api_send(f"move-to {desktop}", 'blank', 'move-failed')
+        return self.api_send(f"move-to {desktop}", '', 'move-failed')
 
 
 def create_skill():
