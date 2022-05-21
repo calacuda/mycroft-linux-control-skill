@@ -9,7 +9,7 @@ import sockets
 def to_api(cmd):
     """replaces spaces with null chars and trurns it to bytes"""
     null = bytes(chr(0), 'utf-8')
-    return bytes('', 'utf-8').join([bytes(str(tok), 'utf-8') + null for tok in cmd.split(' ')])
+    return b''.join([bytes(str(tok), 'utf-8') + null for tok in cmd.split(' ')])
 
 
 def bspwm_send(spath, payload):
@@ -25,7 +25,7 @@ def bspwm_send(spath, payload):
 
 class LinuxControl(MycroftSkill):
     def __init__(self):
-        super().__init__(self)
+        super().__init__()
         self.api_path = ""
         self.bspwm_path = ""
         self.desktops = []
