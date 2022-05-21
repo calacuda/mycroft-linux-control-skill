@@ -82,11 +82,13 @@ class LinuxControl(MycroftSkill):
     def handle_sleep(self, message):
         return self.api_send("sleep", '', 'sleep-failed')
 
-    @intent_handler(IntentBuilder('hibernate'))
+    @intent_handler(IntentBuilder('hibernate').require('hibernate'))
     def handle_hibernate(self, message):
         return self.api_send("hibernate", '', 'hibernate-failed')
 
-    @intent_handler(IntentBuilder('switch-desktops').require('Desktop'))
+    @intent_handler(IntentBuilder('switch-desktops')
+                    .require('switch-desktops')
+                    .require('Desktop'))
     def handle_switch_desktops(self, message):
         desktop = message.data.get('Desktop')
         return self.api_send(f"focus-on {desktop}", '', '')
