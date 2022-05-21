@@ -56,8 +56,8 @@ class LinuxControl(MycroftSkill):
             s.connect(self.api_path)
             s.send(bytes(payload, 'ascii'))
             s.shutdown(1)  # tells the server im done sending data and it can reply now.
-            res = s.recv(1024)
-            self.log.error(f"resived {res.decode('utf-8')[0]}")
+            res = s.recv(1024).decode('utf-8')
+            self.log.error(f"resived {res[0]}")
             if int(res[0]) == 0:
                 # success
                 # have it beep instead of say things if success_f is 'blank'
