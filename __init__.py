@@ -70,24 +70,24 @@ class LinuxControl(MycroftSkill):
     def query_wrap(self, query):
         return send(self.bspwm_path, f"query {payload}").decode('utf-8')
 
-    @intent_file_handler('lock')
+    @intent_handler(IntentBuilder('lock'))
     def handle_lock(self, message):
         return self.api_send("lock", 'lock-success', 'lock-failed')
 
-    @intent_file_handler('sleep')
+    @intent_handler(IntentBuilder('sleep'))
     def handle_sleep(self, message):
         return self.api_send("speep", 'blank', 'sleep-failed')
 
-    @intent_file_handler('hibernate')
+    @intent_handler(IntentBuilder('hibernate'))
     def handle_hibernate(self, message):
         return self.api_send("hibernate", 'blank', 'hibernate-failed')
 
-    @intent_file_handler('switch-desktops').require('Desktop')
+    @intent_handler(IntentBuilder('switch-desktops').require('Desktop'))
     def handle_switch_desktops(self, message):
         desktop = message.data.get('Desktop')
         return self.api_send(f"focus-on {desktop}", 'blank', 'blank')
 
-    @intent_file_handler('move').require('Desktop')
+    @intent_handler(IntentBuilder('move').require('Desktop'))
     def handle_move(self, message):
         desktop = message.data.get('Desktop')
         return self.api_send(f"move-to {desktop}", 'blank', 'move-failed')
