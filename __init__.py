@@ -12,7 +12,7 @@ def to_api(cmd):
     return bytes('', 'utf-8').join([bytes(str(tok), 'utf-8') + null for tok in cmd.split(' ')])
 
 
-def send(spath, payload):
+def bspwm_send(spath, payload):
     """send payload over the unix socket"""
     with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
         s.connect(spath)
@@ -27,6 +27,7 @@ class LinuxControl(MycroftSkill):
     def __init__(self):
         super().__init__(self)
         self.api_path = ""
+        self.bspwm_path = ""
         self.desktops = []
 
     def initialize(self):
@@ -68,7 +69,7 @@ class LinuxControl(MycroftSkill):
 
 
     def query_wrap(self, query):
-        return send(self.bspwm_path, f"query {payload}").decode('utf-8')
+        return bspwm_send(self.bspwm_path, f"query {payload}").decode('utf-8')
 
     @intent_handler(IntentBuilder('lock'))
     def handle_lock(self, message):
