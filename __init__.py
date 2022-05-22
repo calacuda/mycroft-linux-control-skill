@@ -77,6 +77,7 @@ class LinuxControl(MycroftSkill):
 
     @intent_handler(IntentBuilder('LockIntent').require('lock'))
     def handle_lock(self, message):
+        self.log.debug(f"DESKTOPS: {self.desktops}")
         return self.api_send("lock", 'lock-success', 'lock-failed')
 
     @intent_handler(IntentBuilder('SleepIntent').require('sleep'))
