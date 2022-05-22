@@ -77,7 +77,7 @@ class LinuxControl(MycroftSkill):
 
     @intent_handler(IntentBuilder('LockIntent').require('lock'))
     def handle_lock(self, message):
-        self.log.info(f"DESKTOPS: {self.desktops}")
+        # self.log.info(f"DESKTOPS: {self.desktops}")
         return self.api_send("lock", 'lock-success', 'lock-failed')
 
     @intent_handler(IntentBuilder('SleepIntent').require('sleep'))
@@ -92,6 +92,7 @@ class LinuxControl(MycroftSkill):
                     .require('switch-desktops')
                     .require('Desktop'))
     def handle_switch_desktops(self, message):
+        self.log.info(f"DESKTOP: {message.data.get('Desktop')}")
         desktop = message.data.get('Desktop')
         return self.api_send(f"focus-on {desktop}", '', '')
 
