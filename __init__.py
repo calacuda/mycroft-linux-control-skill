@@ -50,6 +50,7 @@ class LinuxControl(MycroftSkill):
                 if desktop:
                     self.desktops.append(desktop)
                     self.register_vocabulary(desktop, 'Desktop')
+        self.log.debug(f"DESKTOPS: {self.desktops}")
 
     def api_send(self, payload, success_f, failed_f):
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
