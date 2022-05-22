@@ -93,7 +93,7 @@ class LinuxControl(MycroftSkill):
         desktop = message.data.get('Desktop')
         return self.api_send(f"focus-on {desktop}", '', '')
 
-    @intent_handler(IntentBuilder('move').require('Desktop'))
+    @intent_handler(IntentBuilder('move').require('move-to').require('Desktop'))
     def handle_move(self, message):
         desktop = message.data.get('Desktop')
         return self.api_send(f"move-to {desktop}", '', 'move-failed')
