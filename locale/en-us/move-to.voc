@@ -1,0 +1,2 @@
+(move|send) (this(window|node)|) to (desktop|screen|)
+put this (window|node) on (desktop|screen|)
