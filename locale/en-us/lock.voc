@@ -2,4 +2,5 @@ lock
 secure
 lock down
 lock-down
-initiate lock-down
+lockdown
+initiate (lock-down|lockdown)
