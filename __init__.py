@@ -6,8 +6,7 @@ import socket
 from subprocess import run, PIPE
 import sockets
 from os import listdir
-from os.path import isfile, expanduser, basename
-from pathlib import Path
+from os.path import expanduser, basename
 
 
 
@@ -116,7 +115,7 @@ class LinuxControl(MycroftSkill):
         for f in listdir(expanduser("~/.config/desktop-automater/layouts/")):
             f_basename = ".".join(basename(f).split(".")[:-1])
             self.log.warning(f"looking at file {f_basename}, equals: {f_basename.lower() == processed_layout}")
-            if Path(f).is_file() and f_basename.lower() == processed_layout:
+            if f_basename.lower() == processed_layout:
                 layout = layout.replace(" ", "-")
                 self.speak_dialog(f"configuring layout {layout}")
                 return self.api_send(f"load-layout {f_basename}", "layout-load-success", "layout-load-failed")
