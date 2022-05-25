@@ -5,6 +5,10 @@ from mycroft import MycroftSkill, intent_file_handler
 import socket
 from subprocess import run, PIPE
 import sockets
+from os import listdir
+from os.path import isfile, expanduser, basename
+
+
 
 def to_api(cmd):
     """replaces spaces with null chars and trurns it to bytes"""
@@ -103,12 +107,19 @@ class LinuxControl(MycroftSkill):
 
     @intent_handler("layout.intent")
     def handle_load_layout(self, message):
-        self.log.warning("setting layout")
-        layout = message.data.get('layout')
-        self.log.warning(f"loading layout {layout}")
-        layout = layout.replace(" ", "-")
-        self.log.warning(f"parsed layout {layout}")
-        self.speak_dialog(f"loading layout named {layout}")
+        # self.log.warning("setting layout")
+        layout = message.data.get('layout')#.replace(" ", "-")
+        # self.log.warning(f"loading layout {layout}")
+        tokenizer = EnglishTokenizer()
+        for f in listdir(expanduser("~/.config/desktop-automater/layouts")):
+            f_basename = ".".join(basename(f).split(".")[:-1])
+            if isfile(f) and tokenizer.tokenize(f_basename)[0] == tokenizer.tokenize(layout)[0]:
+                layout = layout.replace(" ", "-")
+                self.speak_dialog(f"configuring layout {layout}")
+                return self.api_send(f"load-layout {layout}", "layout-load-success", "layout-load-failed")
+
+        self.speak_dialog(f"could not find {layout}, make sure the layout or yaml file is named correctly, and in the right directory.")
+        return False
 
 
 def create_skill():
