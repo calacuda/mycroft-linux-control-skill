@@ -111,7 +111,7 @@ class LinuxControl(MycroftSkill):
         layout = message.data.get('layout')#.replace(" ", "-")
         tokenizer = EnglishTokenizer()
         processed_layout = layout.lower()
-        self.log.warning(f"loading layout {layout}")
+        self.log.info(f"loading layout {layout}")
         for f in listdir(expanduser("~/.config/desktop-automater/layouts/")):
             f_basename = ".".join(basename(f).split(".")[:-1])
             self.log.warning(f"looking at file {f_basename}, equals: {f_basename.lower() == processed_layout}")
