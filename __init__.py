@@ -108,6 +108,7 @@ class LinuxControl(MycroftSkill):
         self.log.debug(f"loading layout {layout}")
         layout = layout.replace(" ", "-")
         self.log.debug(f"parsed layout {layout}")
+        self.speak_dialog("loading layout")
 
 
 def create_skill():
