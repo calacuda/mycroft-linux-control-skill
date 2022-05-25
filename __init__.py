@@ -109,11 +109,12 @@ class LinuxControl(MycroftSkill):
     def handle_load_layout(self, message):
         # self.log.warning("setting layout")
         layout = message.data.get('layout')#.replace(" ", "-")
-        # self.log.warning(f"loading layout {layout}")
         tokenizer = EnglishTokenizer()
         processed_layout = layout.lower()
-        for f in listdir(expanduser("~/.config/desktop-automater/layouts")):
+        self.log.warning(f"loading layout {layout}")
+        for f in listdir(expanduser("~/.config/desktop-automater/layouts/")):
             f_basename = ".".join(basename(f).split(".")[:-1])
+            self.log.warning(f"loading layout {f_basename}")
             if isfile(f) and f_basename.lower() == processed_layout:
                 layout = layout.replace(" ", "-")
                 self.speak_dialog(f"configuring layout {layout}")
