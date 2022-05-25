@@ -117,10 +117,10 @@ class LinuxControl(MycroftSkill):
             if isfile(f) and f_basename.lower() == processed_layout:
                 layout = layout.replace(" ", "-")
                 self.speak_dialog(f"configuring layout {layout}")
-                return self.api_send(f"load-layout {layout}", "layout-load-success", "layout-load-failed")
+                return self.api_send(f"load-layout {f_basename}", "layout-load-success", "layout-load-failed")
 
         self.speak_dialog(
-        f"could not find {layout}, make sure the layout or yaml file is named correctly, and in the right directory. layout file {tokenized_layout}"
+        f"could not find {layout}, make sure the layout or yaml file is named correctly, and in the right directory. layout file {layout}"
         )
         return False
 
