@@ -111,10 +111,10 @@ class LinuxControl(MycroftSkill):
         layout = message.data.get('layout')#.replace(" ", "-")
         # self.log.warning(f"loading layout {layout}")
         tokenizer = EnglishTokenizer()
-        tokenized_layout = tokenizer.tokenize(".".join(basename(layout).split(".")[:-1]))[0]
+        processed_layout = layout.lower()
         for f in listdir(expanduser("~/.config/desktop-automater/layouts")):
             f_basename = ".".join(basename(f).split(".")[:-1])
-            if isfile(f) and tokenizer.tokenize(f_basename)[0] == tokenized_layout:
+            if isfile(f) and f_basename.lower() == processed_layout:
                 layout = layout.replace(" ", "-")
                 self.speak_dialog(f"configuring layout {layout}")
                 return self.api_send(f"load-layout {layout}", "layout-load-success", "layout-load-failed")
