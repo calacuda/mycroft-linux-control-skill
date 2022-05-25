@@ -103,12 +103,12 @@ class LinuxControl(MycroftSkill):
 
     @intent_handler("layout.intent")
     def handle_load_layout(self, message):
-        self.log.debug("setting layout")
+        self.log.warning("setting layout")
         layout = message.data.get('layout')
-        self.log.debug(f"loading layout {layout}")
+        self.log.warning(f"loading layout {layout}")
         layout = layout.replace(" ", "-")
-        self.log.debug(f"parsed layout {layout}")
-        self.speak_dialog("loading layout")
+        self.log.warning(f"parsed layout {layout}")
+        self.speak_dialog(f"loading layout named {layout}")
 
 
 def create_skill():
