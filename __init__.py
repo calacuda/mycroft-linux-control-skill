@@ -101,6 +101,14 @@ class LinuxControl(MycroftSkill):
         desktop = message.data.get('Desktop')
         return self.api_send(f"move-to {desktop}", '', 'move-failed')
 
+    @intent_handler("layout")
+    def handle_load_layout(self, message):
+        self.log.debug("setting layout")
+        layout = message.data.get('layout')
+        self.log.debug(f"loading layout {layout}")
+        layout = layout.replace(" ", "-")
+        self.log.debug(f"parsed layout {layout}")
+
 
 def create_skill():
     return LinuxControl()

@@ -1,3 +1,8 @@
+"""
+this file exsists as a reminder. it is not actually imported, chagnes here will
+have NO AFFECT.
+"""
+
 import sockets
 
 def to_api(cmd):

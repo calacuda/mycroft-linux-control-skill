@@ -1,0 +1,4 @@
+set (up|) (system|) (for|) (layout|configuration|config) {layout}
+(configuration|config) (load|) (layout|configuration|config) {layout}
+load (layout|configuration|config) {layout}
+activate (layout|configuration|config) {layout}
