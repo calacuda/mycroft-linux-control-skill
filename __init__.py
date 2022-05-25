@@ -114,7 +114,7 @@ class LinuxControl(MycroftSkill):
         self.log.info(f"loading layout {layout}")
         for f in listdir(expanduser("~/.config/desktop-automater/layouts/")):
             f_basename = ".".join(basename(f).split(".")[:-1])
-            self.log.warning(f"looking at file {f_basename}, equals: {f_basename.lower() == processed_layout}")
+            self.log.debug(f"looking at file {f_basename}, equals: {f_basename.lower() == processed_layout}")
             if f_basename.lower() == processed_layout:
                 layout = layout.replace(" ", "-")
                 self.speak_dialog(f"configuring layout {layout}")
