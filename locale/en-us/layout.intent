@@ -1,5 +1,5 @@
 set (up|) (system|) (for|) (layout|configuration|config|) {layout} (layout|configuration|config)
 (configuration|config) (load|) (layout|configuration|config|) {layout} (load|layout|configuration|config|)
 load ((layout|configuration|config) file|) {layout}
-load {layout} (layout|configuration|config|)
+load (the|) {layout} (layout|configuration|config|)
 activate (layout|configuration|config|) {layout} (layout|configuration|config)
