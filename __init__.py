@@ -16,15 +16,15 @@ def to_api(cmd):
     return b''.join([bytes(str(tok), 'utf-8') + null for tok in cmd.split(' ')])
 
 
-def bspwm_send(spath, payload):
-    """send payload over the unix socket"""
-    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
-        s.connect(spath)
-        s.send(to_api(payload))
-        s.shutdown(1)
-        res = s.recv(1024)
-        # print(str(res))
-        return res
+# def bspwm_send(spath, payload):
+#     """send payload over the unix socket"""
+#     with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
+#         s.connect(spath)
+#         s.send(to_api(payload))
+#         s.shutdown(1)
+#         res = s.recv(1024)
+#         # print(str(res))
+#         return res
 
 
 class LinuxControl(MycroftSkill):
@@ -62,22 +62,24 @@ class LinuxControl(MycroftSkill):
             s.send(bytes(payload, 'ascii'))
             s.shutdown(1)  # tells the server im done sending data and it can reply now.
             res = s.recv(1024)  # .decode('utf-8')
-            if int(res[0]) == 0:
-                # success
-                # have it beep instead of say things if success_f is 'blank'
-                if success_f:
-                    self.speak_dialog(success_f)
-                return True
-            else:
-                # failed
-                # have it beep instead of say things if failed_f is 'blank'
-                if failed_f:
-                    self.speak_dialog(failed_f)
-                return False
+            try:
+                if int(res[0]) == 0:
+                    # success
+                    # have it beep instead of say things if success_f is 'blank'
+                    if success_f:
+                        self.speak_dialog(success_f)
+                    return True
+                else:
+                    # failed
+                    # have it beep instead of say things if failed_f is 'blank'
+                    if failed_f:
+                        self.speak_dialog(failed_f)
+                    return False
+            except IndexError:
+                pass
 
-
-    def query_wrap(self, query):
-        return bspwm_send(self.bspwm_path, f"query {payload}").decode('utf-8')
+    # def query_wrap(self, query):
+    #     return bspwm_send(self.bspwm_path, f"query {payload}").decode('utf-8')
 
     @intent_handler(IntentBuilder('LockIntent').require('lock'))
     def handle_lock(self, message):
@@ -121,7 +123,7 @@ class LinuxControl(MycroftSkill):
                 return self.api_send(f"load-layout {f_basename}", "layout-load-success", "layout-load-failed")
 
         self.speak_dialog(
-        f"could not find {layout}, make sure the layout or yaml file is named correctly, and in the right directory. layout file {layout}"
+        f"could not find the layout file, {layout}, make sure the layout or yaml file is named correctly, and in the right directory."
         )
         return False
 
